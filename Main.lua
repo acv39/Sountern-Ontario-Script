@@ -50,7 +50,7 @@ local Slider1 = Sec1:Slider({
 local Slider2 = Sec1:Slider({
     Name = "Max RPM",
     Min = 1500,
-    Max = 25000,
+    Max = 36000,
     Default = 6000,
     Suffix = "RPM",
     callback = function(val)
@@ -132,3 +132,5 @@ RunService.Heartbeat:Connect(function()
     end
 end)
 Window:Initialize() -- DO NOT REMOVE
+
+-- Gaming
