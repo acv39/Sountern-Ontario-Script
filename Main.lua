@@ -106,3 +106,5 @@ local Slider4 = Sec1:Slider({
         workspace.Vehicles.LandVehicles:GetChildren()[car]["A-Chassis Tune"].S_Boost.Value = val
     end
 })
+
+Window:Initialize() -- DO NOT REMOVE
