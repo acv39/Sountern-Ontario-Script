@@ -14,7 +14,6 @@ function FindCarIdx()
     end
 end
 
-
 local Window = UILibrary:New({
     Name = "Southern Ontario Car Hax", -- name, Name, title, Title
 })
@@ -29,31 +28,29 @@ local Sec1 = Page1:Section({
     Side = "Left"
 })
 
-local Button1 = Sec1:Button({
+local button1 = Sec1:Button{
     Name = "Find Car",
-    callback = function(arg)
+    Callback = function()
         print("Finding Vehichle")
         FindCarIdx()
     end
-})
+}
 local Slider1 = Sec1:Slider({
-    Name = "Horsepower",
+    Text = "Horsepower",
     Min = 1,
     Max = 9999,
     Default = 300,
-    Suffix = "HP",
-    callback = function(val)
+    Callback = function(val)
         workspace.Vehicles.LandVehicles:GetChildren()[car]["A-Chassis Tune"].Horsepower.Value = val
     end
 })
 
 local Slider2 = Sec1:Slider({
-    Name = "Max RPM",
+    Text = "Max RPM",
     Min = 1500,
-    Max = 36000,
+    Max = 40000,
     Default = 6000,
-    Suffix = "RPM",
-    callback = function(val)
+    Callback = function(val)
         workspace.Vehicles.LandVehicles:GetChildren()[car]["A-Chassis Tune"].Redline.Value = val
         workspace.Vehicles.LandVehicles:GetChildren()[car]["A-Chassis Tune"].PeakRPM.Value = val
     end
@@ -62,10 +59,13 @@ local Slider2 = Sec1:Slider({
 local Toggle1 = Sec1:Toggle({
     Name = "Turbo?",
     callback = function(val)
-        if val == true then
-            workspace.Vehicles.LandVehicles:GetChildren()[car]["A-Chassis Tune"].TurboChargers = 1
+        print(val)
+        if val then
+            print("Turbo Magic 1")
+            workspace.Vehicles.LandVehicles:GetChildren()[car]["A-Chassis Tune"].Turbochargers.Value = 1
         else
-            workspace.Vehicles.LandVehicles:GetChildren()[car]["A-Chassis Tune"].TurboChargers = 0
+            print("Turbo Magic 2")
+            workspace.Vehicles.LandVehicles:GetChildren()[car]["A-Chassis Tune"].Turbochargers.Value = 0
         end
     end
 })
@@ -84,11 +84,14 @@ local Slider3 = Sec1:Slider({
 local Toggle2 = Sec1:Toggle({
     Name = "SuperCharger?",
     callback = function(val)
-        if val == true then
-            workspace.Vehicles.LandVehicles:GetChildren()[car]["A-Chassis Tune"].Superchargers = 1
-            workspace.Vehicles.LandVehicles:GetChildren()[car]["A-Chassis Tune"].S_Sensitivity = 1
+        print(val)
+        if val then
+            print("super Magic 1")
+            workspace.Vehicles.LandVehicles:GetChildren()[car]["A-Chassis Tune"].Superchargers.Value = 1
+            workspace.Vehicles.LandVehicles:GetChildren()[car]["A-Chassis Tune"].S_Sensitivity.Value = 1
         else
-            workspace.Vehicles.LandVehicles:GetChildren()[car]["A-Chassis Tune"].Superchargers = 0
+            print("super Magic 2")
+            workspace.Vehicles.LandVehicles:GetChildren()[car]["A-Chassis Tune"].Superchargers.Value = 0
         end
     end
 })
@@ -103,34 +106,3 @@ local Slider4 = Sec1:Slider({
         workspace.Vehicles.LandVehicles:GetChildren()[car]["A-Chassis Tune"].S_Boost.Value = val
     end
 })
-
---Section 2
-local LiveRPMs = false
-
-local Sec2 = Page1:Section({
-    Name = "Live RPM",
-    Fill = true,
-    Side = "Right"
-})
-
-local Toggle3 = Sec2:Toggle({
-    Name = "LiveRPM Roggle",
-    callback = function(val)
-        LiveRPMs = val
-    end
-})
-
-local Label1 = Sec2:Label({
-    Name = "RPM =",
-    Center = true
-})
-local RunService = game:GetService("RunService")
-
-RunService.Heartbeat:Connect(function()
-    if LiveRPMs then
-        Label1.Name = "RPM = " .. workspace.Vehicles.LandVehicles:GetChildren()[car].LiveRPM.Value
-    end
-end)
-Window:Initialize() -- DO NOT REMOVE
-
--- Gaming
